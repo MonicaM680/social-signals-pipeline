@@ -1,0 +1,153 @@
+-- ###########################################################
+-- # Key Metrics Queries
+-- ###########################################################
+
+-- Total Orders: Count of distinct orders in the system
+SELECT COUNT(DISTINCT OrderID) AS total_orders
+FROM fact_order_items;
+
+-- Total Revenue: Sum of all payment values
+SELECT SUM(PaymentValue) AS total_revenue
+FROM fact_order_items;
+
+-- Average Installments: Average quantity of items per order
+SELECT AVG(Quantity) AS average_installments
+FROM fact_order_items;
+
+-- Delayed Orders: Count of delayed orders where delivery date exceeds estimated delivery date
+SELECT COUNT(DISTINCT OrderID) AS delayed_orders_count
+FROM fact_order_items
+WHERE DeliveredDateKey > EstimatedDeliveryDateKey
+AND DeliveredDateKey IS NOT NULL
+AND EstimatedDeliveryDateKey IS NOT NULL;
+
+-- ###########################################################
+-- # Payment Distribution Query
+-- ###########################################################
+
+-- Payment Method Distribution: Group orders by payment method and calculate counts
+SELECT 
+    CASE 
+        WHEN dp.PaymentType = 'Credit Card' THEN 'Credit Card'
+        WHEN dp.PaymentType = 'blipay' THEN 'Blipay'
+        WHEN dp.PaymentType = 'voucher' THEN 'Voucher'
+        ELSE 'Others'
+    END AS PaymentMethod,
+    COUNT(*) AS Count
+FROM fact_order_items foi
+JOIN dim_payments dp ON foi.PaymentID = dp.PaymentID
+GROUP BY PaymentMethod;
+
+-- ###########################################################
+-- # Order Trends Queries
+-- ###########################################################
+
+-- Monthly Order Distribution: Group orders by year and month
+SELECT 
+    CONCAT(d.Year, '-', LPAD(d.Month, 2, '0')) AS YearMonth,
+    COUNT(foi.OrderID) AS OrderCount
+FROM fact_order_items foi
+JOIN date_d d ON foi.OrderDateKey = d.DateKey
+GROUP BY d.Year, d.Month
+ORDER BY d.Year, d.Month;
+
+-- Peak Order Times by Hour: Group orders by hour of the day
+SELECT 
+    HOUR(OrderTimeKey) AS OrderHour,
+    COUNT(OrderID) AS OrderCount
+FROM fact_order_items
+GROUP BY HOUR(OrderTimeKey)
+ORDER BY OrderHour;
+
+-- Total Orders by Season: Group orders by season
+SELECT 
+    d.Season AS Season,
+    COUNT(foi.OrderID) AS TotalOrders
+FROM fact_order_items foi
+JOIN date_d d ON foi.OrderDateKey = d.DateKey
+GROUP BY d.Season
+ORDER BY 
+    CASE 
+        WHEN d.Season = 'Spring' THEN 1
+        WHEN d.Season = 'Summer' THEN 2
+        WHEN d.Season = 'Fall' THEN 3
+        WHEN d.Season = 'Winter' THEN 4
+        ELSE 5
+    END;
+
+-- ###########################################################
+-- # Customer Satisfaction Query
+-- ###########################################################
+
+-- Average Delivery Delay by Feedback Score: Correlate feedback scores with delivery delays
+SELECT 
+    df.FeedbackScore AS FeedbackScore,
+    AVG(foi.DeliveryDelayDays) AS AvgDeliveryDelayDays
+FROM fact_order_items foi
+JOIN dim_feedbacks df ON foi.FeedbackID = df.FeedbackID
+WHERE df.FeedbackScore IS NOT NULL AND foi.DeliveryDelayDays IS NOT NULL
+GROUP BY df.FeedbackScore
+ORDER BY df.FeedbackScore;
+
+-- ###########################################################
+-- # Logistics Analysis Query
+-- ###########################################################
+
+-- Worst Traffic Routes: Analyze high-traffic routes and delivery delays
+SELECT 
+    ds.SellerState AS SellerState,
+    du.UserState AS UserState,
+    COUNT(foi.OrderID) AS TotalOrders,
+    SUM(CASE WHEN foi.DeliveryDelayDays > 0 THEN 1 ELSE 0 END) AS TotalOrdersDelayed,
+    AVG(foi.DeliveryDelayDays) AS AverageDeliveryDelay,
+    AVG(foi.ShippingDays) AS AvgShippingDays,
+    (SUM(CASE WHEN foi.DeliveryDelayDays > 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(foi.OrderID)) AS DelayPercentage
+FROM 
+    fact_order_items foi
+JOIN 
+    dim_sellers ds ON foi.SellerID = ds.SellerID
+JOIN 
+    dim_users du ON foi.UserID = du.UserID
+GROUP BY 
+    ds.SellerState, du.UserState
+HAVING 
+    COUNT(foi.OrderID) >= 10 -- Exclude routes with very low traffic
+ORDER BY 
+    TotalOrders DESC, AverageDeliveryDelay DESC;
+
+-- ###########################################################
+-- # Payment Preferences by Product Category Query
+-- ###########################################################
+
+-- Payment Method Preferences by Product Category: Analyze payment methods across product categories
+SELECT 
+    pc.ProductCategory AS ProductCategory,
+    CASE 
+        WHEN dp.PaymentType = 'Credit Card' THEN 'Credit Card'
+        WHEN dp.PaymentType = 'blipay' THEN 'Blipay'
+        WHEN dp.PaymentType = 'voucher' THEN 'Voucher'
+        ELSE 'Others'
+    END AS PaymentMethod,
+    COUNT(foi.OrderID) AS TotalOrders
+FROM fact_order_items foi
+JOIN dim_products pc ON foi.ProductID = pc.ProductID
+JOIN dim_payments dp ON foi.PaymentID = dp.PaymentID
+WHERE pc.ProductCategory IS NOT NULL AND pc.ProductCategory != ''  -- Ignore empty or NULL categories
+GROUP BY pc.ProductCategory, PaymentMethod
+ORDER BY pc.ProductCategory, TotalOrders DESC;
+
+-- ###########################################################
+-- # Geographic Insights Query
+-- ###########################################################
+
+-- Top 20 States with Highest Purchase Frequency: Identify states with the most frequent purchases
+SELECT 
+    foi.UserState AS State,
+    COUNT(foi.OrderID) AS PurchaseFrequency
+FROM 
+    fact_order_items foi
+GROUP BY 
+    foi.UserState
+ORDER BY 
+    PurchaseFrequency DESC
+LIMIT 20;
