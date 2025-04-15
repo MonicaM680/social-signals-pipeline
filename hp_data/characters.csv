@@ -1,0 +1,26 @@
+full_name,nickname,hogwarts_house,interpreted_by,children,image,birthdate,index
+Harry James Potter,Harry,Gryffindor,Daniel Radcliffe,"James Sirius Potter, Albus Severus Potter, Lily Luna Potter",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/harry_potter.png,"Jul 31, 1980",0
+Hermione Jean Granger,Hermione,Gryffindor,Emma Watson,"Rose Granger-Weasley, Hugo Granger-Weasley",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/hermione_granger.png,"Sep 19, 1979",1
+Ron Weasley,Ron,Gryffindor,Rupert Grint,"Rose Granger-Weasley, Hugo Granger-Weasley",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/ron_weasley.png,"Mar 1, 1980",2
+Fred Weasley,Fred,Gryffindor,James Phelps,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/fred_weasley.png,"Apr 1, 1978",3
+George Weasley,George,Gryffindor,Oliver Phelps,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/george_weasley.png,"Apr 1, 1978",4
+Bill Weasley,Bill,Gryffindor,Domhnall Gleeson,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/bill_weasley.png,"Nov 29, 1970",5
+Percy Weasley,Percy,Gryffindor,Chris Rankin,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/percy_weasley.png,"Aug 22, 1976",6
+Charlie Weasley,Charlie,Gryffindor,,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/charlie_weasley.png,"Dec 12, 1972",7
+Ginny Weasley,Ginny,Gryffindor,Bonnie Right,"James Sirius Potter, Albus Severus Potter, Lily Luna Potter",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/ginny_weasley.png,"Aug 11, 1981",8
+Molly Weasley,Molly,Gryffindor,Julie Walters,"Ron Weasley, Fred Weasley, George Weasley, Bill Weasley, Percy Weasley, Charlie Weasley, Ginny Weasley",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/molly_weasley.png,"Oct 30, 1949",9
+Arthur Weasley,Arthur,Gryffindor,Mark Williams,"Ron Weasley, Fred Weasley, George Weasley, Bill Weasley, Percy Weasley, Charlie Weasley, Ginny Weasley",https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/arthur_weasley.png,"Feb 6, 1950",10
+Neville Longbottom,Neville,Gryffindor,Matthew Lewis,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/neville_longbottom.png,"Jul 30, 1980",11
+Luna Lovegood,Luna,Ravenclaw,Evanna Lynch,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/luna_lovegood.png,"Feb 13, 1981",12
+Draco Malfoy,Draco,Slytherin,Tom Felton,Scorpius Malfoy,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/draco_malfoy.png,"Jun 5, 1980",13
+Albus Percival Wulfric Brian Dumbledore,Dumbledore,Gryffindor,Richard Harris,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/albus_dumbledore.png,"Aug 29, 1881",14
+Minerva McGonagall,Minerva,Gryffindor,Maggie Smith,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/minerva_mcgonagall.png,"Oct 4, 1935",15
+Remus Lupin,Lupin,Gryffindor,David Thewils,Ted Lupin,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/remus_lupin.png,"Mar 10, 1960",16
+Rubeus Hagrid,Hagrid,Gryffindor,Robbie Coltrane,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/rubeus_hagrid.png,"Dec 6, 1928",17
+Sirius Black,Sirius,Gryffindor,Gary Oldman,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/sirius_black.png,"Nov 3, 1959",18
+Severus Snape,Snape,Slytherin,Alan Rickman,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/severus_snape.png,"Jan 9, 1960",19
+Bellatrix Lestrange,Bella,Slytherin,Helena Bonham Carter,Delphi,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/bellatrix_lestrange.png,"Dec 13, 1951",20
+Lord Voldemort,Voldemort,Slytherin,Ralph Fiennes,Delphi,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/lord_voldemort.png,"Dec 31, 1926",21
+Cedric Diggory,Cedric,Hufflepuff,Robert Pattinson,,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/cedric_diggory.png,"Sep 29, 1977",22
+Nymphadora Tonks,Tonks,Hufflepuff,Natalia Tena,Ted Lupin,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/nymphadora_tonks.png,"Dec 25, 1972",23
+James Potter,James,Gryffindor,Adrian Rawlins,Harry Potter,https://raw.githubusercontent.com/fedeperin/potterapi/main/public/images/characters/james_potter.png,"Mar 27, 1960",24
